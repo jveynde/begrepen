@@ -1,0 +1,4 @@
+:HL["/begrepen/_next/static/chunks/3fgzzw2f6oldb.css","style"]
+2:[["children",{"s":"__PAGE__","h":160}]]
+1:[["children",{"s":"board","h":96,"c":"$Q2"}]]
+0:{"b":"4pDXajRkwQSTAo4PRxDVT","t":{"t":{"s":"","h":80,"c":"$Q1"}}}
