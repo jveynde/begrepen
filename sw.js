@@ -1,12 +1,18 @@
 // Offline support: pages are network-first (so updates arrive), everything
 // else (scripts, styles, icons, audio) is cache-first after the first visit.
-const CACHE = "understood-v2";
-// The app may live under a sub-path (e.g. /begrepen/ on GitHub Pages): work relative to this worker's scope.
-const BASE = new URL(self.registration.scope).pathname; // ends with "/"
-const PAGES = ["", "practice/", "board/", "family/", "helper/"].map((p) => BASE + p);
+// Paths are relative to the service worker's scope, so the app works both at
+// the site root and in a sub-folder (GitHub Pages: /begrepen/).
+const CACHE = "begrepen-v2";
+const BASE = new URL(self.registration.scope).pathname; // e.g. "/begrepen/"
+const PAGES = ["", "practice/", "board/", "family/", "helper/", "checkin/", "print/"].map((p) => BASE + p);
 
 self.addEventListener("install", (event) => {
-  event.waitUntil(caches.open(CACHE).then((c) => c.addAll([...PAGES, BASE + "manifest.webmanifest"])).then(() => self.skipWaiting()));
+  event.waitUntil(
+    caches
+      .open(CACHE)
+      .then((c) => Promise.allSettled([...PAGES, BASE + "manifest.webmanifest"].map((u) => c.add(u))))
+      .then(() => self.skipWaiting()),
+  );
 });
 
 self.addEventListener("activate", (event) => {

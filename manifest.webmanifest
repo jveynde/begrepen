@@ -1,6 +1,6 @@
 {
-  "name": "Understood",
-  "short_name": "Understood",
+  "name": "Begrepen",
+  "short_name": "Begrepen",
   "description": "Comprehension practice and conversation support for aphasia.",
   "start_url": "./",
   "scope": "./",
